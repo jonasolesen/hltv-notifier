@@ -6,6 +6,8 @@ import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.hltvnotifier.services.EventService
+import com.hltvnotifier.services.TeamService
 import com.hltvnotifier.viewmodels.SubscriptionViewModel
 import com.hltvnotifier.viewmodels.TeamViewModel
 import kotlinx.coroutines.*
@@ -49,8 +51,8 @@ class MainActivity : AppCompatActivity() {
         coroutineScope.launch {
             try {
                 isLoading = true
-//                val team = TeamService.getTeamAsync(astralisId).await().run { println(ranking) }
-//                val events = EventService.getFromTeamAsync(astralisId).await().map { println(it.id) }
+                val teamx = TeamService.getTeamAsync(astralisId).await().run { println(ranking) }
+                val events = EventService.getFromTeamAsync(astralisId).await().map { println(it.id) }
                 val team = teamViewModel.getFromId(astralisId)
                 println(team.id)
             } catch (e: Throwable) {

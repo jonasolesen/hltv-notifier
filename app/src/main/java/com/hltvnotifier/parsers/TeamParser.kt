@@ -15,7 +15,11 @@ object TeamParser {
 
     fun parseId(document: Document) = 6665
 
-    fun parseName(document: Document) = "Team"
+    fun parseName(document: Document): String {
+        return document
+            .getElementsByClass("profile-team-name")[0]
+            .text()
+    }
 
     fun parseCountry(document: Document) = "Country"
 

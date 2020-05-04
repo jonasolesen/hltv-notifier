@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">HLTV Notifier</string>
+    <string name="MainListTitle">My Teams</string>
+    <string name="AddTeam">Add team</string>
 </resources>
