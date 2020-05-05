@@ -2,4 +2,7 @@
     <string name="app_name">HLTV Notifier</string>
     <string name="MainListTitle">My Teams</string>
     <string name="AddTeam">Add team</string>
+    <string name="channel_name">matches</string>
+    <string name="channel_description">Notification channel for matchs</string>
+    <string name="channel_id">matches</string>
 </resources>

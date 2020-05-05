@@ -11,7 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class TeamAdapter(val teamViewModel: TeamViewModel, val subscriptionViewModel: SubscriptionViewModel) : RecyclerView.Adapter<TeamAdapter.TeamViewHolder>() {
+class TeamAdapter(private val teamViewModel: TeamViewModel, private val subscriptionViewModel: SubscriptionViewModel) : RecyclerView.Adapter<TeamAdapter.TeamViewHolder>() {
     private var teams: List<SubscriptionEntity> = listOf()
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
@@ -39,8 +39,7 @@ class TeamAdapter(val teamViewModel: TeamViewModel, val subscriptionViewModel: S
 
     override fun onBindViewHolder(holder: TeamViewHolder, position: Int) {
         coroutineScope.launch {
-            val name = teamViewModel.getFromId(teams[position].teamId).name
-            holder.textView.text = name
+            holder.textView.text = teamViewModel.getFromId(teams[position].teamId).name
         }
 
     }
