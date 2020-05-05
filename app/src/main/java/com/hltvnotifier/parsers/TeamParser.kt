@@ -13,15 +13,20 @@ object TeamParser {
         )
     }
 
-    fun parseId(document: Document) = 6665
+    fun parseId(document: Document) = document.getElementsByClass("profile-team-logo-container")
+        .first()
+        .getElementsByTag("img")
+        .first()
+        .attr("src")
+        .split("/")
+        .last()
+        .toInt()
 
     fun parseName(document: Document) = "Team"
 
     fun parseCountry(document: Document) = "Country"
 
-    fun parseRanking(document: Document?): Int {
-        if (document == null) return 1
-
+    fun parseRanking(document: Document): Int {
         return document
             .getElementsByClass("profile-team-stat")[0]
             .getElementsByTag("a")

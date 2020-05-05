@@ -2,19 +2,21 @@ package com.hltvnotifier.services
 
 import com.google.gson.GsonBuilder
 import com.hltvnotifier.models.SearchResult
+import com.hltvnotifier.models.Team
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object SearchService {
+object HltvService {
     private const val baseUrl = "https://hltv.org"
 
-    fun getSearchService(): SearchApi {
+    fun getService(): HltvApi {
         val gson = GsonBuilder().registerTypeAdapterFactory(SearchResult.Team.Deserializer).create()
 
         return Retrofit.Builder()
             .baseUrl(baseUrl)
+            .addConverterFactory(JsoupConverterFactory(Team::class))
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
-            .create(SearchApi::class.java)
+            .create(HltvApi::class.java)
     }
 }

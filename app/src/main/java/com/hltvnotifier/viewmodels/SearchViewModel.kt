@@ -4,12 +4,12 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.hltvnotifier.models.SearchResult
-import com.hltvnotifier.services.SearchService
+import com.hltvnotifier.services.HltvService
 import kotlinx.coroutines.*
 
 class SearchViewModel(application: Application) : AndroidViewModel(application) {
     private var job: Job? = null
-    private val searchService = SearchService.getSearchService()
+    private val searchService = HltvService.getService()
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         handleError("Exception: ${throwable.localizedMessage}")
     }
