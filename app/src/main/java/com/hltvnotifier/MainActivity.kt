@@ -1,5 +1,6 @@
 package com.hltvnotifier
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 //        viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
         subscriptionViewModel = ViewModelProvider(this).get(SubscriptionViewModel::class.java)
         teamViewModel = ViewModelProvider(this).get(TeamViewModel::class.java)
+
         setContentView(R.layout.activity_main)
         progressBar = findViewById(R.id.progressBar)
 //        subscriptionViewModel.subscriptions.observe(this, Observer { subscriptions ->
@@ -79,5 +81,10 @@ class MainActivity : AppCompatActivity() {
             println(subscriptionViewModel.subscriptions.value)
         }
         println("Unsubscribe")
+    }
+
+    fun search(view: View) {
+        val intent = Intent(this, SearchActivity::class.java)
+        startActivity(intent)
     }
 }
