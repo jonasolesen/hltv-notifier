@@ -1,1 +1,1 @@
-"# hltv-notifier" 
+# hltv-notifier
