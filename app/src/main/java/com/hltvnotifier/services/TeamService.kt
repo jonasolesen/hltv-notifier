@@ -18,8 +18,4 @@ object TeamService : WebService() {
             TeamEntity.create(getDocument(url))
         }
     }
-
-//    override fun onHandleIntent(intent: Intent?) {
-//        TODO("Not yet implemented")
-//    }
 }
