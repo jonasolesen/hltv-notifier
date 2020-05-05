@@ -13,6 +13,7 @@ data class TeamEntity(
     @NotNull val ranking: Int,
     val country: String
 ) {
+
     companion object {
         fun create(document: Document) = TeamParser.parseDocument(document)
     }

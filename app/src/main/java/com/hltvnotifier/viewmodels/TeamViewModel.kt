@@ -14,7 +14,7 @@ class TeamViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         val teamDao = AppDatabase.getDatabase(application, viewModelScope).teamDao()
-        repository = TeamRepository(teamDao)
+        repository = TeamRepository.getInstance(teamDao)
         teams = repository.teams
     }
 
