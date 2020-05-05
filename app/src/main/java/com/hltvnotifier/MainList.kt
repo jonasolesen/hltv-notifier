@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hltvnotifier.services.EventService
+import com.hltvnotifier.services.MatchService
 import com.hltvnotifier.services.TeamService
 import com.hltvnotifier.viewmodels.SubscriptionViewModel
 import com.hltvnotifier.viewmodels.TeamViewModel
@@ -69,10 +70,14 @@ class MainList : AppCompatActivity() {
         println("Hello")
         coroutineScope.launch {
             try {
-                //val events = EventService.getFromTeamAsync(astralisId).await().map { println(it.id) }
                 val team = teamsViewModel.getFromId(astralisId)
                 subscriptionViewModel.subscribe(6665)
-                println(team.id)
+
+                // TODO Save them to db and create notifications for the matches.
+                val matches = MatchService.getFromTeamAsync(6665).await()
+                for (match in matches) {
+                    println(match.Id.toString() + " " + match.date.toString() + " " + match.team1 + " " + match.team2)
+                }
             } catch (e: Throwable) {
                 throw e
             }
