@@ -1,4 +1,4 @@
-package com.hltvnotifier
+package com.hltvnotifier.views
 
 import android.os.Bundle
 import android.view.View
@@ -7,7 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hltvnotifier.adapters.TeamListAdapter
+import com.hltvnotifier.R
+import com.hltvnotifier.views.adapters.TeamListAdapter
 import com.hltvnotifier.viewmodels.SearchViewModel
 import kotlinx.android.synthetic.main.activity_search.*
 

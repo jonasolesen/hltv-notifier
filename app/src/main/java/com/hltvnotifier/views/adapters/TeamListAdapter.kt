@@ -1,4 +1,4 @@
-package com.hltvnotifier.adapters
+package com.hltvnotifier.views.adapters
 
 import android.view.LayoutInflater
 import android.view.View

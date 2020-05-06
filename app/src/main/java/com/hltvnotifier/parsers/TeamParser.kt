@@ -1,32 +1,29 @@
 package com.hltvnotifier.parsers
 
-import com.hltvnotifier.data.entities.TeamEntity
+import com.hltvnotifier.models.Team
 import org.jsoup.nodes.Document
 
-object TeamParser {
-    fun parseDocument(document: Document): TeamEntity {
-        return TeamEntity(
-            parseId(document),
-            parseName(document),
-            parseRanking(document),
-            parseCountry(document)
-        )
-    }
+object TeamParser : ResourceParser<Team>() {
+    override val clazz = Team::class.java
 
-    fun parseId(document: Document) = document.getElementsByClass("profile-team-logo-container")
-        .first()
-        .getElementsByTag("img")
-        .first()
-        .attr("src")
-        .split("/")
-        .last()
-        .toInt()
+    override fun fromDocument(document: Document) = Team(
+        parseId(document),
+        parseRanking(document),
+        parseName(document),
+        parseCountry(document)
+    )
 
-    fun parseName(document: Document) = "Team"
+    private fun parseId(document: Document) =
+        document.getElementsByClass("profile-team-logo-container")
+            .first()
+            .getElementsByTag("img")
+            .first()
+            .attr("src")
+            .split("/")
+            .last()
+            .toInt()
 
-    fun parseCountry(document: Document) = "Country"
-
-    fun parseRanking(document: Document): Int {
+    private fun parseRanking(document: Document): Int {
         return document
             .getElementsByClass("profile-team-stat")[0]
             .getElementsByTag("a")
@@ -34,4 +31,8 @@ object TeamParser {
             .substring(1)
             .toInt()
     }
+
+    private fun parseName(document: Document) = "Team"
+
+    private fun parseCountry(document: Document) = "Country"
 }

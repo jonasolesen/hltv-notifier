@@ -1,12 +1,12 @@
-package com.hltvnotifier
+package com.hltvnotifier.views
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.hltvnotifier.R
 import com.hltvnotifier.services.HltvService
 import com.hltvnotifier.viewmodels.SubscriptionViewModel
 import com.hltvnotifier.viewmodels.TeamViewModel
@@ -37,9 +37,6 @@ class MainActivity : AppCompatActivity() {
 //        subscriptionViewModel.subscriptions.observe(this, Observer { subscriptions ->
 //            subscriptions.forEach { println(it.teamId) }
 //        })
-        teamViewModel.teams.observe(this, Observer { teams ->
-            teams.forEach { println("Something updated: ${it.id}") }
-        })
     }
 
     override fun onDestroy() {

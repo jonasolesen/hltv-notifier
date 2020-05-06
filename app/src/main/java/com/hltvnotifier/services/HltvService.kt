@@ -2,7 +2,7 @@ package com.hltvnotifier.services
 
 import com.google.gson.GsonBuilder
 import com.hltvnotifier.models.SearchResult
-import com.hltvnotifier.models.Team
+import com.hltvnotifier.parsers.TeamParser
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -14,7 +14,7 @@ object HltvService {
 
         return Retrofit.Builder()
             .baseUrl(baseUrl)
-            .addConverterFactory(JsoupConverterFactory(Team::class))
+            .addConverterFactory(JsoupConverterFactory(TeamParser))
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(HltvApi::class.java)

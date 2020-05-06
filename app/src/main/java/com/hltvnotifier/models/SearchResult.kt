@@ -28,8 +28,8 @@ object SearchResult {
                 val elementAdapter = gson.getAdapter(JsonElement::class.java)
 
                 return object : TypeAdapter<T>() {
-                    override fun read(`in`: JsonReader): T {
-                        var json = elementAdapter.read(`in`)
+                    override fun read(input: JsonReader): T {
+                        var json = elementAdapter.read(input)
 
                         if (json.isJsonArray) {
                             val result = json.asJsonArray.get(0).asJsonObject
