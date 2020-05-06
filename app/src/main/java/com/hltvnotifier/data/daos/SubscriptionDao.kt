@@ -3,12 +3,12 @@ package com.hltvnotifier.data.daos
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
-import com.hltvnotifier.data.entities.SubscriptionEntity
+import com.hltvnotifier.data.models.Subscription
 
 @Dao
 interface SubscriptionDao {
     @Query("SELECT * FROM subscriptions")
-    fun getAll(): LiveData<List<SubscriptionEntity>>
+    fun getAll(): LiveData<List<Subscription>>
 
     @Query("INSERT OR IGNORE INTO subscriptions (team_id) VALUES (:teamId)")
     suspend fun insert(teamId: Int)

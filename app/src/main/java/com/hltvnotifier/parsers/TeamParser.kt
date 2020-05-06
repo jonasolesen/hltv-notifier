@@ -1,12 +1,12 @@
 package com.hltvnotifier.parsers
 
-import com.hltvnotifier.models.Team
+import com.hltvnotifier.data.models.Team
 import org.jsoup.nodes.Document
 
 object TeamParser : ResourceParser<Team>() {
     override val clazz = Team::class.java
 
-    override fun fromDocument(document: Document) = Team(
+    override fun parse(document: Document) = Team(
         parseId(document),
         parseRanking(document),
         parseName(document),
@@ -35,4 +35,8 @@ object TeamParser : ResourceParser<Team>() {
     private fun parseName(document: Document) = "Team"
 
     private fun parseCountry(document: Document) = "Country"
+
+    override fun parseMultiple(document: Document): List<Team> {
+        TODO("Not yet implemented")
+    }
 }

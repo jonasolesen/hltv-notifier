@@ -2,21 +2,21 @@ package com.hltvnotifier.data.daos
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.hltvnotifier.data.entities.MatchEntity
+import com.hltvnotifier.data.models.Match
 
 @Dao
 interface MatchDao {
     @Query("SELECT * FROM matches")
-    fun getAll(): LiveData<List<MatchEntity>>
+    fun getAll(): LiveData<List<Match>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(match: MatchEntity)
+    suspend fun insert(match: Match)
 
     @Update
-    suspend fun update(match: MatchEntity)
+    suspend fun update(match: Match)
 
     @Query("SELECT * FROM matches WHERE teamId = :teamId")
-    suspend fun getAllForTeam(teamId: Int)
+    suspend fun getAllForTeam(teamId: Int): List<Match>
 
     @Query("DELETE FROM matches WHERE id = :id")
     suspend fun delete(id: Int)

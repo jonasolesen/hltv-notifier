@@ -1,6 +1,6 @@
 package com.hltvnotifier.parsers
 
-import com.hltvnotifier.models.Event
+import com.hltvnotifier.data.models.Event
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 

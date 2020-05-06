@@ -1,4 +1,4 @@
-package com.hltvnotifier.models
+package com.hltvnotifier.data.models
 
 import com.google.gson.Gson
 import com.google.gson.JsonElement

@@ -1,17 +1,15 @@
-package com.hltvnotifier.data.entities
+package com.hltvnotifier.data.models
 
 import androidx.annotation.NonNull
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import java.time.Instant
+import androidx.room.*
+import java.util.*
 
 @Entity(tableName = "matches")
-data class MatchEntity(
+data class Match(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id")
     @NonNull
-    val Id: Int,
+    val id: Int,
 
     @ColumnInfo(name = "teamId")
     @NonNull
@@ -27,7 +25,5 @@ data class MatchEntity(
 
     @ColumnInfo(name = "date")
     @NonNull
-    val date: Instant
-) {
-
-}
+    val date: Date
+)

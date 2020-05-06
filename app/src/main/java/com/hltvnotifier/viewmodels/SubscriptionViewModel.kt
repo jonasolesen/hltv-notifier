@@ -5,13 +5,13 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.hltvnotifier.data.AppDatabase
-import com.hltvnotifier.data.entities.SubscriptionEntity
+import com.hltvnotifier.data.models.Subscription
 import com.hltvnotifier.data.repositories.SubscriptionRepository
 import kotlinx.coroutines.launch
 
 class SubscriptionViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: SubscriptionRepository
-    val subscriptions: LiveData<List<SubscriptionEntity>>
+    val subscriptions: LiveData<List<Subscription>>
 
     init {
         val subscriptionDao = AppDatabase.getDatabase(application, viewModelScope).subscriptionDao()

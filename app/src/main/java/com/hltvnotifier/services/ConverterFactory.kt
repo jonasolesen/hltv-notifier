@@ -9,23 +9,27 @@ import java.lang.reflect.Type
 
 class JsoupConverterFactory<T>(private val parser: ResourceParser<T>) :
     Converter.Factory() {
-
     override fun responseBodyConverter(
         type: Type,
         annotations: Array<Annotation>,
         retrofit: Retrofit
     ): Converter<ResponseBody, T>? {
-        if (type.hashCode() != parser.clazz.hashCode()) return null
+        var parseMultiple = false
+        if (!type.toString().contains(parser.clazz.name)) return null
+        if (type.toString().contains("java.util.List")) parseMultiple = true
 
-        return JsoupResourceConverter(parser)
+        return JsoupResourceConverter(parser, parseMultiple)
     }
 
-    class JsoupResourceConverter<T>(private val parser: ResourceParser<T>) :
-        Converter<ResponseBody, T> {
+    class JsoupResourceConverter<T>(
+        private val parser: ResourceParser<T>,
+        private val parseMultiple: Boolean = false
+    ) : Converter<ResponseBody, T> {
         override fun convert(response: ResponseBody): T {
             val document = Jsoup.parse(response.string())
+            if (parseMultiple) return parser.parseMultiple(document) as T
 
-            return parser.fromDocument(document)
+            return parser.parse(document)
         }
     }
 }

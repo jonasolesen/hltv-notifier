@@ -2,10 +2,10 @@ package com.hltvnotifier.data.repositories
 
 import androidx.lifecycle.LiveData
 import com.hltvnotifier.data.daos.SubscriptionDao
-import com.hltvnotifier.data.entities.SubscriptionEntity
+import com.hltvnotifier.data.models.Subscription
 
 class SubscriptionRepository(private val subscriptionDao: SubscriptionDao) {
-    val subscriptions: LiveData<List<SubscriptionEntity>> = subscriptionDao.getAll()
+    val subscriptions: LiveData<List<Subscription>> = subscriptionDao.getAll()
 
     suspend fun subscribe(teamId: Int) {
         println("Saving team id $teamId")

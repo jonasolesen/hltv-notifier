@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.hltvnotifier.data.entities.SubscriptionEntity
+import com.hltvnotifier.data.models.Subscription
 import com.hltvnotifier.viewmodels.SubscriptionViewModel
 import com.hltvnotifier.viewmodels.TeamViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -12,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TeamAdapter(val teamViewModel: TeamViewModel, val subscriptionViewModel: SubscriptionViewModel) : RecyclerView.Adapter<TeamAdapter.TeamViewHolder>() {
-    private var teams: List<SubscriptionEntity> = listOf()
+    private var teams: List<Subscription> = listOf()
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
     class TeamViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView)
@@ -28,7 +28,7 @@ class TeamAdapter(val teamViewModel: TeamViewModel, val subscriptionViewModel: S
         coroutineScope.launch { subscriptionViewModel.unsubscribe(teams[position].teamId) }
     }
 
-    fun setDate(teams: List<SubscriptionEntity>) {
+    fun setDate(teams: List<Subscription>) {
         this.teams = teams
         notifyDataSetChanged()
     }
@@ -39,8 +39,8 @@ class TeamAdapter(val teamViewModel: TeamViewModel, val subscriptionViewModel: S
 
     override fun onBindViewHolder(holder: TeamViewHolder, position: Int) {
         coroutineScope.launch {
-            val name = teamViewModel.getFromId(teams[position].teamId).name
-            holder.textView.text = name
+//            val name = teamViewModel.getFromId(teams[position].teamId).name
+//            holder.textView.text = name
         }
 
     }

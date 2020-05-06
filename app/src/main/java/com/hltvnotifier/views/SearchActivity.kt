@@ -10,12 +10,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.hltvnotifier.R
 import com.hltvnotifier.views.adapters.TeamListAdapter
 import com.hltvnotifier.viewmodels.SearchViewModel
+import com.hltvnotifier.views.adapters.ItemClickListener
+import kotlinx.android.synthetic.main.activity_main_list.*
 import kotlinx.android.synthetic.main.activity_search.*
+import kotlinx.android.synthetic.main.activity_search.teamList
 
-class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
+class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener, ItemClickListener {
     private lateinit var viewModel: SearchViewModel
     private lateinit var searchView: SearchView
-    private val teamListAdapter = TeamListAdapter(arrayListOf())
+    private val teamListAdapter = TeamListAdapter(arrayListOf(), this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +35,10 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         }
 
         initializeObservers()
+    }
+
+    override fun onClick(view: View, position: Int) {
+        println(position)
     }
 
     private fun initializeObservers() {

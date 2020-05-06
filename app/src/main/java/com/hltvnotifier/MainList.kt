@@ -9,9 +9,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.hltvnotifier.services.EventService
-import com.hltvnotifier.services.MatchService
-import com.hltvnotifier.services.TeamService
+import com.hltvnotifier.services.HltvService
+//import com.hltvnotifier.services.EventService
+//import com.hltvnotifier.services.MatchService
+//import com.hltvnotifier.services.TeamService
 import com.hltvnotifier.viewmodels.SubscriptionViewModel
 import com.hltvnotifier.viewmodels.TeamViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -26,9 +27,9 @@ class MainList : AppCompatActivity() {
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var teamsViewModel: TeamViewModel
     private lateinit var subscriptionViewModel: SubscriptionViewModel
+    private val hltvService = HltvService.getService()
     private val astralisId: Int = 6665
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,27 +58,20 @@ class MainList : AppCompatActivity() {
         subscriptionViewModel.subscriptions.observe(this, Observer { teams ->
             viewAdapter.setDate(teams)
         })
-
-        teamsViewModel.teams.observe(this, Observer { teams -> {
-            println("Changed")
-        } })
-
-
-
     }
 
     fun addTeam(view: View) {
         println("Hello")
         coroutineScope.launch {
             try {
-                val team = teamsViewModel.getFromId(astralisId)
+//                val team = teamsViewModel.getFromId(astralisId)
                 subscriptionViewModel.subscribe(6665)
 
                 // TODO Save them to db and create notifications for the matches.
-                val matches = MatchService.getFromTeamAsync(6665).await()
-                for (match in matches) {
-                    println(match.Id.toString() + " " + match.date.toString() + " " + match.team1 + " " + match.team2)
-                }
+//                val matches = MatchService.getFromTeamAsync(6665).await()
+//                for (match in matches) {
+//                    println(match.Id.toString() + " " + match.date.toString() + " " + match.team1 + " " + match.team2)
+//                }
             } catch (e: Throwable) {
                 throw e
             }

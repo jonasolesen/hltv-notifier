@@ -1,6 +1,6 @@
 package com.hltvnotifier.stores
 
-import com.hltvnotifier.models.Event
+import com.hltvnotifier.data.models.Event
 
 object EventStore {
     suspend fun saveEvents(events: List<Event>) {

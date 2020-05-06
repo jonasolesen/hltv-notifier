@@ -3,7 +3,7 @@ package com.hltvnotifier.viewmodels
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.hltvnotifier.models.SearchResult
+import com.hltvnotifier.data.models.SearchResult
 import com.hltvnotifier.services.HltvService
 import kotlinx.coroutines.*
 

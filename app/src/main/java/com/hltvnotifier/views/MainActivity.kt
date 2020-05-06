@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.hltvnotifier.R
 import com.hltvnotifier.services.HltvService
+import com.hltvnotifier.viewmodels.MatchViewModel
 import com.hltvnotifier.viewmodels.SubscriptionViewModel
 import com.hltvnotifier.viewmodels.TeamViewModel
 import kotlinx.coroutines.*
@@ -17,7 +19,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
     private lateinit var subscriptionViewModel: SubscriptionViewModel
     private lateinit var teamViewModel: TeamViewModel
+    private lateinit var matchViewModel: MatchViewModel
+
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
+    private val hltvService = HltvService.getService()
 
     private var isLoading = false
         set(value) {
@@ -31,12 +36,15 @@ class MainActivity : AppCompatActivity() {
 //        viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
         subscriptionViewModel = ViewModelProvider(this).get(SubscriptionViewModel::class.java)
         teamViewModel = ViewModelProvider(this).get(TeamViewModel::class.java)
+        matchViewModel = ViewModelProvider(this).get(MatchViewModel::class.java)
 
         setContentView(R.layout.activity_main)
         progressBar = findViewById(R.id.progressBar)
-//        subscriptionViewModel.subscriptions.observe(this, Observer { subscriptions ->
-//            subscriptions.forEach { println(it.teamId) }
-//        })
+
+        matchViewModel.matches.observe(this, Observer { matches ->
+            println("Matches changed ${matches.size}")
+            matches.forEach { println(it.teamId) }
+        })
     }
 
     override fun onDestroy() {
@@ -49,11 +57,11 @@ class MainActivity : AppCompatActivity() {
         coroutineScope.launch {
             try {
                 isLoading = true
-                val team = HltvService.getService().getTeam(6665)
-//                val team = TeamService.getTeamAsync(astralisId).await().run { println(ranking) }
-//                val events = EventService.getFromTeamAsync(astralisId).await().map { println(it.id) }
-//                val team = teamViewModel.getFromId(astralisId)
-                println(team.id)
+//                val team = hltvService.getTeam(astralisId)
+                val matches = matchViewModel.getFromTeam(astralisId)
+                val match = matches.first()
+
+                println(matches.first())
             } catch (e: Throwable) {
                 throw e
             } finally {

@@ -1,4 +1,4 @@
-package com.hltvnotifier.models
+package com.hltvnotifier.data.models
 
 data class Team(
     val id: Int,
