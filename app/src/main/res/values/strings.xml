@@ -3,4 +3,7 @@
     <string name="MainListTitle">My Teams</string>
     <string name="AddTeam">Add team</string>
     <string name="search_placeholder">Find team</string>
+    <string name="logo">Logo</string>
+    <string name="search_title">Find team</string>
+    <string name="search_hint">Team</string>
 </resources>

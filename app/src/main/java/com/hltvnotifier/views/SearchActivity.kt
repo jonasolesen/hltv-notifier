@@ -1,6 +1,11 @@
 package com.hltvnotifier.views
 
+import android.app.Activity
+import android.app.SearchManager
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
@@ -15,9 +20,8 @@ import kotlinx.android.synthetic.main.activity_main_list.*
 import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.activity_search.teamList
 
-class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener, ItemClickListener {
+class SearchActivity : AppCompatActivity(), ItemClickListener {
     private lateinit var viewModel: SearchViewModel
-    private lateinit var searchView: SearchView
     private val teamListAdapter = TeamListAdapter(arrayListOf(), this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,19 +30,44 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener, Item
 
         viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
 
-        searchView = findViewById(R.id.searchView)
-        searchView.setOnQueryTextListener(this)
-
         teamList.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = teamListAdapter
         }
 
         initializeObservers()
+        handleIntent(intent)
     }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.options_menu, menu)
+
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        (menu.findItem(R.id.search).actionView as SearchView).apply {
+            setSearchableInfo(searchManager.getSearchableInfo(componentName))
+            isIconifiedByDefault = false
+            isFocusedByDefault = true
+        }
+
+        return true
+
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        handleIntent(intent)
+    }
+
 
     override fun onClick(view: View, position: Int) {
         println(position)
+    }
+
+    private fun handleIntent(intent: Intent) {
+        println("Called")
+        intent.getStringExtra(SearchManager.QUERY)?.also { query ->
+            viewModel.search(query)
+        }
     }
 
     private fun initializeObservers() {
@@ -48,21 +77,5 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener, Item
                 teamListAdapter.updateTeams(teams)
             }
         })
-
-        viewModel.isLoading.observe(this, Observer { isLoading ->
-            isLoading?.let {
-                if (isLoading) teamList.visibility = View.INVISIBLE
-            }
-        })
-    }
-
-    override fun onQueryTextSubmit(query: String?): Boolean {
-        println("Submit")
-        if (query != null) viewModel.search(query)
-        return false
-    }
-
-    override fun onQueryTextChange(newText: String?): Boolean {
-        return false
     }
 }

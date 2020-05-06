@@ -1,9 +1,13 @@
 package com.hltvnotifier.views
 
+import android.app.SearchManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -30,6 +34,27 @@ class MainActivity : AppCompatActivity() {
             if (value) progressBar.visibility = View.VISIBLE
             else progressBar.visibility = View.INVISIBLE
         }
+
+    override fun onSearchRequested(): Boolean {
+        return super.onSearchRequested()
+    }
+
+
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.options_menu, menu)
+
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        (menu.findItem(R.id.search).actionView as SearchView).apply {
+            setSearchableInfo(searchManager.getSearchableInfo(componentName))
+            isIconifiedByDefault = false
+            isFocusedByDefault = true
+        }
+
+        return true
+
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
