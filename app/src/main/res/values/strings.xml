@@ -12,4 +12,6 @@
     <string name="flag_url">https://static.hltv.org/images/bigflags/30x20%1$s.gif</string>
     <string name="vs">VS</string>
     <string name="teams">Teams</string>
+    <string name="subscribe">Subscribe</string>
+    <string name="unsubscribe">Unsubscribe</string>
 </resources>

@@ -18,6 +18,9 @@ interface SubscriptionDao {
     @Query("DELETE FROM subscriptions WHERE team_id = :teamId")
     suspend fun delete(teamId: Int)
 
+    @Query("SELECT * FROM subscriptions WHERE team_id = :teamId LIMIT 1")
+    suspend fun isSubscribed(teamId: Int): Subscription?
+
     @Query("DELETE FROM subscriptions")
     suspend fun deleteAll()
 }

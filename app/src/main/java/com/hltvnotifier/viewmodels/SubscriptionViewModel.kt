@@ -26,4 +26,8 @@ class SubscriptionViewModel(application: Application) : AndroidViewModel(applica
     suspend fun unsubscribe(id: Int) = viewModelScope.launch {
         repository.unsubscribe(id)
     }
+
+    suspend fun isSubscribed(teamId: Int): Boolean {
+        return repository.isSubscribed(teamId)
+    }
 }

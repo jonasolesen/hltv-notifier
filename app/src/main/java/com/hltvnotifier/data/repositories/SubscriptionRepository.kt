@@ -15,6 +15,10 @@ class SubscriptionRepository(private val subscriptionDao: SubscriptionDao) {
         subscriptionDao.delete(teamId)
     }
 
+    suspend fun isSubscribed(teamId: Int): Boolean {
+        return subscriptionDao.isSubscribed(teamId) != null
+    }
+
     companion object {
         @Volatile
         private var instance: SubscriptionRepository? = null
