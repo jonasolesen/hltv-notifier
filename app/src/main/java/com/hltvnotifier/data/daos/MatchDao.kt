@@ -23,4 +23,8 @@ interface MatchDao {
 
     @Query("DELETE FROM matches")
     suspend fun deleteAll()
+
+    @Query("SELECT * FROM MATCHES WHERE id = :id LIMIT 1")
+    suspend fun get(id: Int): Match
+
 }
