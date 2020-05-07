@@ -1,16 +1,18 @@
 package com.hltvnotifier.data
 
 import androidx.room.TypeConverter
+import java.time.Instant
 import java.util.*
 
 class Converters {
     @TypeConverter
-    fun fromTimestamp(value: Long?): Date? {
-        return if (value == null) null else Date(value)
+    fun fromTimestamp(value: Long?): Instant? {
+        return if (value == null) null else Instant.ofEpochMilli(value)
     }
 
     @TypeConverter
-    fun toTimestamp(date: Date?): Long? {
-        return date?.time
+    fun toTimestamp(date: Instant?): Long? {
+        return date?.toEpochMilli()
     }
+
 }

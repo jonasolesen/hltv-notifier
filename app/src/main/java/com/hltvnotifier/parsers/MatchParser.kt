@@ -43,7 +43,7 @@ object MatchParser : ResourceParser<Match>() {
             teamId,
             team1,
             team2,
-            Date.from(date)
+            date
         )
     }
 

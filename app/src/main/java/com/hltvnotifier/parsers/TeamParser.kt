@@ -10,8 +10,17 @@ object TeamParser : ResourceParser<Team>() {
         parseId(document),
         parseRanking(document),
         parseName(document),
-        parseCountry(document)
+        parseCountry(document),
+        parseFlagUrl(document)
     )
+
+    private fun parseFlagUrl(document: Document): String {
+        return document.getElementsByClass("team-country")
+            .first()
+            .getElementsByTag("img")
+            .first()
+            .attr("src")
+    }
 
     private fun parseId(document: Document) =
         document.getElementsByClass("profile-team-logo-container")
@@ -39,7 +48,7 @@ object TeamParser : ResourceParser<Team>() {
     }
 
     private fun parseCountry(document: Document): String {
-        return document.getElementsByClass("team-country text")
+        return document.getElementsByClass("team-country")
             .first()
             .text()
     }

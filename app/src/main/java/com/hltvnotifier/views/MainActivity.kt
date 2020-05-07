@@ -35,10 +35,6 @@ class MainActivity : AppCompatActivity() {
             else progressBar.visibility = View.INVISIBLE
         }
 
-    override fun onSearchRequested(): Boolean {
-        return super.onSearchRequested()
-    }
-
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

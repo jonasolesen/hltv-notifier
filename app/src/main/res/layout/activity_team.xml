@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Team">
+    tools:context=".views.TeamActivity">
 
     <ImageView
         android:id="@+id/logoView"
@@ -65,7 +65,7 @@
         app:layout_constraintTop_toBottomOf="@+id/flag" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/maches"
+        android:id="@+id/matches"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"

@@ -6,6 +6,9 @@
     <string name="logo">Logo</string>
     <string name="search_title">Find team</string>
     <string name="search_hint">Team</string>
-    <string name="Upcoming matches">Matches</string>
     <string name="upcoming_matches">Upcoming matches</string>
+    <string name="team_ranking">Ranking: %1$d</string>
+    <string name="team_logo_url">https://static.hltv.org/images/team/logo/%1$d</string>
+    <string name="flag_url">https://static.hltv.org/images/bigflags/30x20%1$s.gif</string>
+    <string name="vs">VS</string>
 </resources>

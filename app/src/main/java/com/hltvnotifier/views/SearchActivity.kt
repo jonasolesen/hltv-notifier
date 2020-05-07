@@ -60,7 +60,10 @@ class SearchActivity : AppCompatActivity(), ItemClickListener {
 
 
     override fun onClick(view: View, position: Int) {
-        println(position)
+        val intent = Intent(this, TeamActivity::class.java).apply {
+            putExtra("TeamId", teamListAdapter.teams[position].id)
+        }
+        startActivity(intent)
     }
 
     private fun handleIntent(intent: Intent) {

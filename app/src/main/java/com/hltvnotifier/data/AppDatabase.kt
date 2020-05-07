@@ -51,6 +51,7 @@ abstract class AppDatabase : RoomDatabase() {
 
                     // Delete all content here.
                     subscriptionDao.deleteAll()
+                    matchDao.deleteAll()
                 }
             }
         }

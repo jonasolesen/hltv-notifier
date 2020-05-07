@@ -2,6 +2,8 @@ package com.hltvnotifier.data.models
 
 import androidx.annotation.NonNull
 import androidx.room.*
+import java.sql.Types.INTEGER
+import java.time.Instant
 import java.util.*
 
 @Entity(tableName = "matches")
@@ -25,5 +27,5 @@ data class Match(
 
     @ColumnInfo(name = "date")
     @NonNull
-    val date: Date
+    val date: Instant
 )
