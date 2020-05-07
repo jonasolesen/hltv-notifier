@@ -14,4 +14,7 @@
     <string name="teams">Teams</string>
     <string name="subscribe">Subscribe</string>
     <string name="unsubscribe">Unsubscribe</string>
+    <string name="channel_name">matches</string>
+    <string name="channel_description">Notification channel for matches</string>
+    <string name="channel_id">matches</string>
 </resources>

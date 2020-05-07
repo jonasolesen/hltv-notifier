@@ -17,6 +17,14 @@ class MatchRepository(private val matchDao: MatchDao) {
             .apply { forEach { matchDao.insert(it) } }
     }
 
+    fun getMatch(id: Int): Match? {
+        if (matches.value!!.any { it.id == id }) {
+            println("Team found locally")
+            return matches.value!!.find { it.id == id }!!
+        }
+        return null
+     }
+
     companion object {
         @Volatile
         private var instance: MatchRepository? = null
