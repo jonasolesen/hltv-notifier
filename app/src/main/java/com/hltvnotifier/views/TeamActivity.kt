@@ -26,7 +26,6 @@ class TeamActivity : AppCompatActivity() {
     private var isSubscribed = false
 
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
-    private val hltvService = HltvService.getService()
     private lateinit var matchViewModel: MatchViewModel
     private lateinit var teamViewModel: TeamViewModel
     private lateinit var subscriptionViewModel: SubscriptionViewModel

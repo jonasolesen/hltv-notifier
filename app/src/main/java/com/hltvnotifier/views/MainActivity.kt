@@ -26,8 +26,6 @@ class MainActivity : AppCompatActivity(), ItemClickListener {
     private val subscriptionListAdapter = SubscriptionListAdapter(this, arrayListOf(), this)
     private lateinit var viewModel: SubscriptionViewModel
 
-
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.options_menu, menu)
 
