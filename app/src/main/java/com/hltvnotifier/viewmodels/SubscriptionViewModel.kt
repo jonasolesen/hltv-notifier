@@ -19,8 +19,8 @@ class SubscriptionViewModel(application: Application) : AndroidViewModel(applica
         subscriptions = repository.subscriptions
     }
 
-    suspend fun subscribe(id: Int) = viewModelScope.launch {
-        repository.subscribe(id)
+    suspend fun subscribe(sub: Subscription) = viewModelScope.launch {
+        repository.subscribe(sub)
     }
 
     suspend fun unsubscribe(id: Int) = viewModelScope.launch {

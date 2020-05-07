@@ -28,16 +28,4 @@
         android:textAlignment="textStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-    <ImageView
-        android:id="@+id/flagView"
-        android:layout_width="50dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="center|start"
-        android:layout_weight="0"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/logo"
-        android:maxWidth="50dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp" />
-
 </LinearLayout>

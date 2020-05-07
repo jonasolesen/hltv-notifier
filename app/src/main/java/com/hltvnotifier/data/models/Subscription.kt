@@ -10,5 +10,9 @@ data class Subscription(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "team_id")
     @NonNull
-    val teamId: Int
+    val teamId: Int,
+
+    @ColumnInfo(name = "team_name")
+    @NonNull
+    val teamName: String
 )

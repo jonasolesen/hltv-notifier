@@ -1,6 +1,5 @@
 package com.hltvnotifier.views
 
-import android.app.Activity
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
@@ -13,16 +12,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hltvnotifier.R
-import com.hltvnotifier.views.adapters.TeamListAdapter
+import com.hltvnotifier.views.adapters.SearchTeamListAdapter
 import com.hltvnotifier.viewmodels.SearchViewModel
 import com.hltvnotifier.views.adapters.ItemClickListener
-import kotlinx.android.synthetic.main.activity_main_list.*
-import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.activity_search.teamList
 
 class SearchActivity : AppCompatActivity(), ItemClickListener {
     private lateinit var viewModel: SearchViewModel
-    private val teamListAdapter = TeamListAdapter(arrayListOf(), this)
+    private val teamListAdapter = SearchTeamListAdapter(arrayListOf(), this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

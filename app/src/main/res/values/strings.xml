@@ -11,4 +11,5 @@
     <string name="team_logo_url">https://static.hltv.org/images/team/logo/%1$d</string>
     <string name="flag_url">https://static.hltv.org/images/bigflags/30x20%1$s.gif</string>
     <string name="vs">VS</string>
+    <string name="teams">Teams</string>
 </resources>

@@ -7,9 +7,8 @@ import com.hltvnotifier.data.models.Subscription
 class SubscriptionRepository(private val subscriptionDao: SubscriptionDao) {
     val subscriptions: LiveData<List<Subscription>> = subscriptionDao.getAll()
 
-    suspend fun subscribe(teamId: Int) {
-        println("Saving team id $teamId")
-        subscriptionDao.insert(teamId)
+    suspend fun subscribe(sub: Subscription) {
+        subscriptionDao.insert(sub)
     }
 
     suspend fun unsubscribe(teamId: Int) {
