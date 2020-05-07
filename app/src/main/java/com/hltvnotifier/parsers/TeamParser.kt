@@ -32,9 +32,17 @@ object TeamParser : ResourceParser<Team>() {
             .toInt()
     }
 
-    private fun parseName(document: Document) = "Team"
+    private fun parseName(document: Document): String {
+        return document.getElementsByClass("profile-team-name")
+            .first()
+            .text()
+    }
 
-    private fun parseCountry(document: Document) = "Country"
+    private fun parseCountry(document: Document): String {
+        return document.getElementsByClass("team-country text")
+            .first()
+            .text()
+    }
 
     override fun parseMultiple(document: Document): List<Team> {
         TODO("Not yet implemented")
