@@ -34,9 +34,8 @@ class MatchWorker(context: Context, workerParams: WorkerParameters) :
 //            .build()
 
         val subscriptions = subscriptionDao.getAll()
-        if (subscriptions.value.isNullOrEmpty()) return Result.success()
 
-        subscriptions.value!!.forEach {
+        subscriptions.value?.forEach {
             hltvService.getMatchesFromTeam(it.teamId).forEach { match -> matchDao.insert(match) }
         }
 
