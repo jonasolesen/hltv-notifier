@@ -9,6 +9,10 @@ import com.hltvnotifier.services.NotificationService
 
 class BootReceiver: BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
+        if (intent!!.action != "android.intent.action.BOOT_COMPLETED") {
+            return
+        }
+
         val pm =
             context!!.getSystemService(Context.POWER_SERVICE) as PowerManager
         val wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "hltv-notifier::boot")
