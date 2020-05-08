@@ -5,6 +5,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import com.hltvnotifier.services.MatchUpdater
 
 class HltvNotifier : Application() {
     override fun onCreate() {
@@ -27,6 +28,8 @@ class HltvNotifier : Application() {
                 getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
         }
+
+        MatchUpdater.createServiceUpdater(this)
     }
 
 }

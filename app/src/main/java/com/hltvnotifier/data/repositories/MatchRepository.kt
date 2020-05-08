@@ -17,6 +17,11 @@ class MatchRepository(private val matchDao: MatchDao) {
             .apply { forEach { matchDao.insert(it) } }
     }
 
+    suspend fun getUpdatedFromTeam(id: Int): List<Match> {
+        return HltvService.getService().getMatchesFromTeam(id)
+            .apply { forEach { matchDao.insert(it) } }
+    }
+
     companion object {
         @Volatile
         private var instance: MatchRepository? = null
