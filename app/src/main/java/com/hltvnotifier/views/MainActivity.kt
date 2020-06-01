@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity(), ItemClickListener {
         return true
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         subscriptionViewModel = ViewModelProvider(this).get(SubscriptionViewModel::class.java)
