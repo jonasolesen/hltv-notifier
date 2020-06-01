@@ -72,15 +72,13 @@ class TeamActivity : AppCompatActivity() {
     }
 
     fun subscribe(view: View) {
-        if (!isSubscribed) {
-            coroutineScope.launch {
+        coroutineScope.launch {
+            if (!isSubscribed) {
                 subscriptionViewModel.subscribe(Subscription(team.id, team.name))
 
                 val matches = matchViewModel.getFromTeam(team.id)
                 NotificationService.setNotificationsForMatches(context, matches)
-            }
-        } else {
-            coroutineScope.launch {
+            } else {
                 subscriptionViewModel.unsubscribe(team.id)
 
                 val matches = matchViewModel.getFromTeam(team.id)
