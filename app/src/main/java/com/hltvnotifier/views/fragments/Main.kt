@@ -3,7 +3,6 @@ package com.hltvnotifier.views.fragments
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,19 +17,9 @@ import com.hltvnotifier.views.TeamActivity
 import com.hltvnotifier.views.adapters.ItemClickListener
 import com.hltvnotifier.views.adapters.SubscriptionListAdapter
 import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Main.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Main : Fragment(), ItemClickListener {
     private lateinit var subscriptionViewModel: SubscriptionViewModel
-
-    private val coroutineScope = CoroutineScope(Dispatchers.Main)
     private lateinit var subscriptionListAdapter: SubscriptionListAdapter
     private lateinit var viewModel: SubscriptionViewModel
     private lateinit var matchViewModel: MatchViewModel
@@ -39,7 +28,6 @@ class Main : Fragment(), ItemClickListener {
         super.onCreate(savedInstanceState)
         subscriptionViewModel = ViewModelProvider(this).get(SubscriptionViewModel::class.java)
         matchViewModel = ViewModelProvider(this).get(MatchViewModel::class.java)
-
         viewModel = ViewModelProvider(this).get(SubscriptionViewModel::class.java)
     }
 
@@ -47,7 +35,6 @@ class Main : Fragment(), ItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
@@ -69,16 +56,10 @@ class Main : Fragment(), ItemClickListener {
         )
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        coroutineScope.cancel()
-    }
-
     override fun onClick(view: View, position: Int) {
-        // Gonna fix this later...
-        /*val intent = Intent(this, TeamActivity::class.java).apply {
+        val intent = Intent(activity, TeamActivity::class.java).apply {
             putExtra("TeamId", subscriptionListAdapter.subscriptions[position].teamId)
         }
-        startActivity(intent)*/
+        startActivity(intent)
     }
 }

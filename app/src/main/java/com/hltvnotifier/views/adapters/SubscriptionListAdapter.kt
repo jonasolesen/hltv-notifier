@@ -17,7 +17,7 @@ class SubscriptionListAdapter(
     fun updateSubscriptions(newSubscriptions: List<Subscription>) {
         subscriptions.clear()
         subscriptions.addAll(newSubscriptions)
-        Log.i("wtfupdate", newSubscriptions.size.toString());
+        Log.i("wtfupdate", subscriptions.size.toString())
         notifyDataSetChanged()
     }
 
