@@ -32,13 +32,11 @@ object TeamParser : ResourceParser<Team>() {
             .last()
             .toInt()
 
-    private fun parseRanking(document: Document): Int {
+    private fun parseRanking(document: Document): String {
         return document
             .getElementsByClass("profile-team-stat")[0]
             .getElementsByTag("a")
             .text()
-            .substring(1)
-            .toInt()
     }
 
     private fun parseName(document: Document): String {
