@@ -12,10 +12,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hltvnotifier.R
-import com.hltvnotifier.views.adapters.SearchTeamListAdapter
 import com.hltvnotifier.viewmodels.SearchViewModel
 import com.hltvnotifier.views.adapters.ItemClickListener
-import kotlinx.android.synthetic.main.activity_search.teamList
+import com.hltvnotifier.views.adapters.SearchTeamListAdapter
+import kotlinx.android.synthetic.main.activity_search.*
 
 class SearchActivity : AppCompatActivity(), ItemClickListener {
     private lateinit var viewModel: SearchViewModel
@@ -62,7 +62,6 @@ class SearchActivity : AppCompatActivity(), ItemClickListener {
     }
 
     private fun handleIntent(intent: Intent) {
-        println("Called")
         intent.getStringExtra(SearchManager.QUERY)?.also { query ->
             viewModel.search(query)
         }

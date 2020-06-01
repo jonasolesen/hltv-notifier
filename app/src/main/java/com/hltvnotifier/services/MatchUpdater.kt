@@ -12,7 +12,6 @@ object MatchUpdater {
     }
 
     fun createServiceUpdater(context: Context) {
-        println("Creating service updater")
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
             .setRequiresBatteryNotLow(true)

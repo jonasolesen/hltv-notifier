@@ -5,7 +5,6 @@ import okhttp3.ResponseBody
 import org.jsoup.Jsoup
 import retrofit2.Converter
 import retrofit2.Retrofit
-import java.lang.Exception
 import java.lang.reflect.Type
 
 class JsoupConverterFactory<T>(private val parser: ResourceParser<T>) : Converter.Factory() {
@@ -32,7 +31,6 @@ class JsoupConverterFactory<T>(private val parser: ResourceParser<T>) : Converte
 
                 return parser.parse(document)
             } catch (e: Exception) {
-                println("Could not parse document")
                 return null
             }
         }

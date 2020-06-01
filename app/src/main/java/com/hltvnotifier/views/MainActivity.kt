@@ -1,13 +1,9 @@
 package com.hltvnotifier.views
 
-import com.hltvnotifier.receivers.AlarmReceiver
-import android.app.AlarmManager
-import android.app.PendingIntent
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.SystemClock
 import android.view.Menu
 import android.view.View
 import android.widget.SearchView
@@ -21,7 +17,10 @@ import com.hltvnotifier.viewmodels.SubscriptionViewModel
 import com.hltvnotifier.views.adapters.ItemClickListener
 import com.hltvnotifier.views.adapters.SubscriptionListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.cancel
 
 @ExperimentalCoroutinesApi
 class MainActivity : AppCompatActivity(), ItemClickListener {
@@ -59,7 +58,10 @@ class MainActivity : AppCompatActivity(), ItemClickListener {
             adapter = subscriptionListAdapter
         }
 
-        viewModel.subscriptions.observe(this, Observer { s -> subscriptionListAdapter.updateSubscriptions(s) })
+        viewModel.subscriptions.observe(
+            this,
+            Observer { s -> subscriptionListAdapter.updateSubscriptions(s) }
+        )
     }
 
     override fun onDestroy() {

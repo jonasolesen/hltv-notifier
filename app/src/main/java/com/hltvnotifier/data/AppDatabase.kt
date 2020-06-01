@@ -46,12 +46,12 @@ abstract class AppDatabase : RoomDatabase() {
             super.onOpen(db)
             INSTANCE?.let { database ->
                 scope.launch {
-                    val subscriptionDao = database.subscriptionDao()
-                    val matchDao = database.matchDao()
+//                    val subscriptionDao = database.subscriptionDao()
+//                    val matchDao = database.matchDao()
 
                     // Delete all content here.
-                    subscriptionDao.deleteAll()
-                    matchDao.deleteAll()
+//                    subscriptionDao.deleteAll()
+//                    matchDao.deleteAll()
                 }
             }
         }
