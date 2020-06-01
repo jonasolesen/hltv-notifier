@@ -18,7 +18,6 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
     val searchError = MutableLiveData<String?>()
     val isLoading = MutableLiveData(false)
 
-
     fun search(input: String) {
         if (input.length < 2) return
         isLoading.value = true

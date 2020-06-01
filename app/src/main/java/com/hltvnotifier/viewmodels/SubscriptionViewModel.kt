@@ -17,9 +17,11 @@ class SubscriptionViewModel(application: Application) : AndroidViewModel(applica
         val subscriptionDao = AppDatabase.getDatabase(application, viewModelScope).subscriptionDao()
         repository = SubscriptionRepository(subscriptionDao)
         subscriptions = repository.subscriptions
+        println("Subscriptions: ${subscriptions.value?.size}}")
     }
 
     suspend fun subscribe(sub: Subscription) = viewModelScope.launch {
+        println("Subscribing ${sub.teamName}")
         repository.subscribe(sub)
     }
 

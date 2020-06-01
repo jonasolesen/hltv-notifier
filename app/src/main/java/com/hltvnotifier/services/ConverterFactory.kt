@@ -5,6 +5,7 @@ import okhttp3.ResponseBody
 import org.jsoup.Jsoup
 import retrofit2.Converter
 import retrofit2.Retrofit
+import java.lang.Exception
 import java.lang.reflect.Type
 
 class JsoupConverterFactory<T>(private val parser: ResourceParser<T>) : Converter.Factory() {
@@ -23,11 +24,17 @@ class JsoupConverterFactory<T>(private val parser: ResourceParser<T>) : Converte
         private val parser: ResourceParser<T>,
         private val parseMultiple: Boolean = false
     ) : Converter<ResponseBody, T> {
-        override fun convert(response: ResponseBody): T {
+        override fun convert(response: ResponseBody): T? {
             val document = Jsoup.parse(response.string())
-            if (parseMultiple) return parser.parseMultiple(document) as T
 
-            return parser.parse(document)
+            try {
+                if (parseMultiple) return parser.parseMultiple(document) as T
+
+                return parser.parse(document)
+            } catch (e: Exception) {
+                println("Could not parse document")
+                return null
+            }
         }
     }
 }

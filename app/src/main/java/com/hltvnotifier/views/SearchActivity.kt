@@ -47,14 +47,12 @@ class SearchActivity : AppCompatActivity(), ItemClickListener {
         }
 
         return true
-
     }
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         handleIntent(intent)
     }
-
 
     override fun onClick(view: View, position: Int) {
         val intent = Intent(this, TeamActivity::class.java).apply {

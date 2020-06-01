@@ -48,8 +48,6 @@ class TeamActivity : AppCompatActivity() {
 
         teamId = intent.getIntExtra("TeamId", 0)
 
-
-
         coroutineScope.launch {
             isSubscribed = subscriptionViewModel.isSubscribed(teamId)
             updateBtn()
@@ -74,14 +72,12 @@ class TeamActivity : AppCompatActivity() {
     }
 
     fun subscribe(view: View) {
-
         if (!isSubscribed) {
             coroutineScope.launch {
                 subscriptionViewModel.subscribe(Subscription(team.id, team.name))
 
                 val matches = matchViewModel.getFromTeam(team.id)
                 NotificationService.setNotificationsForMatches(context, matches)
-
             }
         } else {
             coroutineScope.launch {
@@ -91,6 +87,7 @@ class TeamActivity : AppCompatActivity() {
                 NotificationService.cancelNotificationsForMatches(context, matches)
             }
         }
+
         isSubscribed = !isSubscribed
         updateBtn()
     }

@@ -5,9 +5,12 @@ import androidx.work.*
 import com.hltvnotifier.data.AppDatabase
 import com.hltvnotifier.data.daos.MatchDao
 import com.hltvnotifier.data.daos.SubscriptionDao
+import com.hltvnotifier.data.models.Match
 import com.hltvnotifier.data.models.Subscription
+import com.hltvnotifier.data.repositories.MatchRepository
 import com.hltvnotifier.services.HltvApi
 import com.hltvnotifier.services.HltvService
+import com.hltvnotifier.services.NotificationService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,29 +19,20 @@ import kotlinx.coroutines.withContext
 class MatchWorker(context: Context, workerParams: WorkerParameters) :
     CoroutineWorker(context, workerParams) {
 
-    private var matchDao: MatchDao
-    private var subscriptionDao: SubscriptionDao
-    private var hltvService: HltvApi
+    override suspend fun doWork(): Result = withContext(Dispatchers.Default) {
+        println("Updating matches")
+        val database = AppDatabase.getDatabase(applicationContext, this)
+        val matchRepo = MatchRepository(database.matchDao())
 
-    init {
-        val coroutineScope = CoroutineScope(Dispatchers.Default)
-        matchDao = AppDatabase.getDatabase(context, coroutineScope).matchDao()
-        subscriptionDao = AppDatabase.getDatabase(context, coroutineScope).subscriptionDao()
-        hltvService = HltvService.getService()
-    }
-
-
-    override suspend fun doWork(): Result {
-//        val constraints = Constraints.Builder()
-//            .setRequiredNetworkType(NetworkType.CONNECTED)
-//            .build()
-
-        val subscriptions = subscriptionDao.getAll()
+        val subscriptions = database.subscriptionDao().getAll()
+        val matches = ArrayList<Match>()
 
         subscriptions.value?.forEach {
-            hltvService.getMatchesFromTeam(it.teamId).forEach { match -> matchDao.insert(match) }
+            matches.addAll(matchRepo.getUpdatedFromTeam(it.teamId))
         }
 
-        return Result.success()
+        NotificationService.setNotificationsForMatches(applicationContext, matches)
+
+        Result.success()
     }
 }

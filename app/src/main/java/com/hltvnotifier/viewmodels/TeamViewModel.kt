@@ -8,7 +8,7 @@ import com.hltvnotifier.services.HltvService
 
 class TeamViewModel(application: Application) : AndroidViewModel(application) {
     private val hltvService = HltvService.getService()
-    val teams = MutableLiveData<MutableList<Team>>()
+    private val teams = MutableLiveData<MutableList<Team>>()
 
     suspend fun getFromId(id: Int): Team {
         if (!teams.value.isNullOrEmpty() && teams.value!!.any { match -> match.id == id }) {

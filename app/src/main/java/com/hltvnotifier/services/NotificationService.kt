@@ -19,7 +19,8 @@ object NotificationService {
 
             alarmMgr.setExact(
                 AlarmManager.RTC_WAKEUP, match.date.toEpochMilli(),
-                pendingIntent)
+                pendingIntent
+            )
         }
     }
 
@@ -30,10 +31,14 @@ object NotificationService {
             val alarmIntent = Intent(context, AlarmReceiver::class.java).apply {
                 putExtra("matchId", match.id)
             }
-            val pendingIntent = PendingIntent.getBroadcast(context, match.id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+            val pendingIntent = PendingIntent.getBroadcast(
+                context,
+                match.id,
+                alarmIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
 
             alarmMgr.cancel(pendingIntent)
         }
     }
-
 }

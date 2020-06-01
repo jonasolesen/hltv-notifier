@@ -41,7 +41,6 @@
             android:value=".views.SearchActivity" />
 
         <receiver android:process=":remote" android:name=".receivers.AlarmReceiver" />
-        <receiver android:process=":remote" android:name=".receivers.MatchUpdaterReceiver" />
         <receiver android:name=".receivers.BootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
