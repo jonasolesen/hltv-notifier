@@ -17,13 +17,10 @@ class MatchRepository(private val matchDao: MatchDao) {
             .apply { forEach { matchDao.insert(it) } }
     }
 
-    fun getMatch(id: Int): Match? {
-        if (matches.value!!.any { it.id == id }) {
-            println("Team found locally")
-            return matches.value!!.find { it.id == id }!!
-        }
-        return null
-     }
+    suspend fun getUpdatedFromTeam(id: Int): List<Match> {
+        return HltvService.getService().getMatchesFromTeam(id)
+            .apply { forEach { matchDao.insert(it) } }
+    }
 
     companion object {
         @Volatile
