@@ -7,16 +7,14 @@ import retrofit2.Converter
 import retrofit2.Retrofit
 import java.lang.reflect.Type
 
-class JsoupConverterFactory<T>(private val parser: ResourceParser<T>) :
-    Converter.Factory() {
+class JsoupConverterFactory<T>(private val parser: ResourceParser<T>) : Converter.Factory() {
     override fun responseBodyConverter(
         type: Type,
         annotations: Array<Annotation>,
         retrofit: Retrofit
     ): Converter<ResponseBody, T>? {
-        var parseMultiple = false
         if (!type.toString().contains(parser.clazz.name)) return null
-        if (type.toString().contains("java.util.List")) parseMultiple = true
+        val parseMultiple = type.toString().contains(List::class.java.name)
 
         return JsoupResourceConverter(parser, parseMultiple)
     }
